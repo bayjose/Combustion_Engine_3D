@@ -23,6 +23,7 @@ public class GemRegistry{
     private static LinkedList<Material> rare = new LinkedList<Material>();
     private static LinkedList<Material> legendary = new LinkedList<Material>();
     private static LinkedList<Material> mythic = new LinkedList<Material>();
+    private static LinkedList<Gem> composite = new LinkedList<Gem>();
     
     private static SpriteSheet resources;
     
@@ -45,6 +46,22 @@ public class GemRegistry{
         rare.add(new Material("Aquamariene",0,3));
         legendary.add(new Material("Diamond",0,4));
         mythic.add(new Material("Fire Opal",0,5));
+        
+        for (Material common1 : common) {
+            composite.add(new Gem(EnumRarity.COMMON,EnumQuality.IRIDESCENT,resources.getImage((int)common1.position.getX(), (int)common1.position.getY()), common1.name));
+        }
+        for (Material common1 : uncommon) {
+            composite.add(new Gem(EnumRarity.UNCOMMON,EnumQuality.IRIDESCENT,resources.getImage((int)common1.position.getX(), (int)common1.position.getY()), common1.name));
+        }
+        for (Material common1 : rare) {
+            composite.add(new Gem(EnumRarity.RARE,EnumQuality.IRIDESCENT,resources.getImage((int)common1.position.getX(), (int)common1.position.getY()), common1.name));
+        }
+        for (Material common1 : legendary) {
+            composite.add(new Gem(EnumRarity.LEGENDARY,EnumQuality.IRIDESCENT,resources.getImage((int)common1.position.getX(), (int)common1.position.getY()), common1.name));
+        }
+        for (Material common1 : mythic) {
+            composite.add(new Gem(EnumRarity.MYTHIC,EnumQuality.IRIDESCENT,resources.getImage((int)common1.position.getX(), (int)common1.position.getY()), common1.name));
+        }
     }
     
     public static Gem genRandomGem(){
@@ -68,23 +85,6 @@ public class GemRegistry{
     }
     
     public static void renderAllGems(int x, int y, Graphics g){
-        LinkedList<Gem> composite = new LinkedList<Gem>();
-        for (Material common1 : common) {
-            composite.add(new Gem(EnumRarity.COMMON,EnumQuality.IRIDESCENT,resources.getImage((int)common1.position.getX(), (int)common1.position.getY()), common1.name));
-        }
-        for (Material common1 : uncommon) {
-            composite.add(new Gem(EnumRarity.UNCOMMON,EnumQuality.IRIDESCENT,resources.getImage((int)common1.position.getX(), (int)common1.position.getY()), common1.name));
-        }
-        for (Material common1 : rare) {
-            composite.add(new Gem(EnumRarity.RARE,EnumQuality.IRIDESCENT,resources.getImage((int)common1.position.getX(), (int)common1.position.getY()), common1.name));
-        }
-        for (Material common1 : legendary) {
-            composite.add(new Gem(EnumRarity.LEGENDARY,EnumQuality.IRIDESCENT,resources.getImage((int)common1.position.getX(), (int)common1.position.getY()), common1.name));
-        }
-        for (Material common1 : mythic) {
-            composite.add(new Gem(EnumRarity.MYTHIC,EnumQuality.IRIDESCENT,resources.getImage((int)common1.position.getX(), (int)common1.position.getY()), common1.name));
-        }
-        
         for (int i = 0; i< composite.size(); i++) {
             composite.get(i).RenderAt(x + i * 96, y, g);
         }
